@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { UploadButton } from "@uploadthing/react"
+import { OurFileRouter } from "@/app/api/uploadthing/core"
 import { X } from "lucide-react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
@@ -38,15 +39,11 @@ export default function ImageUploader() {
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
-          <UploadButton
+          <UploadButton<OurFileRouter>
             endpoint="imageUploader"
+            url="http://localhost:3030/api/uploadthing" // Updated backend URL
             onClientUploadComplete={handleUploadComplete}
             onUploadError={handleUploadError}
-            config={{
-              mode: "auto",
-              maxFileCount: 4,
-              maxFileSize: "4MB",
-            }}
           />
           <div className="grid grid-cols-2 gap-4">
             {uploadedFiles.map((file, index) => (
